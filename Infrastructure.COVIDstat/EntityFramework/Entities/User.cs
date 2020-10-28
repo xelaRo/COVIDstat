@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Infrastructure.COVIDstat.EntityFramework.Entities
 {
-    class User
+    public class User
     {
         public Guid UserId { get; set; }
         public string Email { get; set; }

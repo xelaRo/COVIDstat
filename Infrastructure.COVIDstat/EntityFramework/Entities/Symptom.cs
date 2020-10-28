@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Infrastructure.COVIDstat.EntityFramework.Entities
 {
-    class Symptom
+    public class Symptom
     {
         public Guid SymptomId { get; set; }
         public string Name { get; set; }
