@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="EntityFramework\Repositories\" />
+    <Compile Remove="EntityFramework\Repositories\**" />
+    <EmbeddedResource Remove="EntityFramework\Repositories\**" />
+    <None Remove="EntityFramework\Repositories\**" />
   </ItemGroup>
 
   <ItemGroup>
