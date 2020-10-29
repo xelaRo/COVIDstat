@@ -12,5 +12,7 @@ namespace Infrastructure.COVIDstat.EntityFramework.Entities
         public DateTime Date { get; set; }
         public int MyProperty { get; set; }
         public Result Result { get; set; }
+
+        public virtual ICollection<Patient> Patients { get; set; }
     }
 }

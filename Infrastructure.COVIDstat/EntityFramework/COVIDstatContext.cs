@@ -13,8 +13,7 @@ namespace Infrastructure.COVIDstat.EntityFramework
         {
             Database.EnsureCreated();
         }
-        public DbSet<Answer> Answer { get; set; }
-        public DbSet<City> City { get; set; }
+        public DbSet<District> District { get; set; }
         public DbSet<Patient> Patient { get; set; }
         public DbSet<PatientXSymptom> PatientXSymptom { get; set; }
         public DbSet<Symptom> Symptom { get; set; }
