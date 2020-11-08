@@ -40,6 +40,7 @@ namespace Domain.COVIDstat.Services
 
         public async Task<Patient> AddPatientForm(PatientRegistrationFormDTO patientRegistrationFormDto)
         {
+            int totalScore = 0;
             var county = await _countyRepository.GetCounty(patientRegistrationFormDto.DistrictId);
 
             if (county == null)
@@ -47,15 +48,22 @@ namespace Domain.COVIDstat.Services
                 throw  new ArgumentException($"Cannot find district with id: {patientRegistrationFormDto.DistrictId}");
             }
 
-            Patient patient = new Patient();
+            foreach (var symptomId in patientRegistrationFormDto.SymptomsIds)
+            {
+                var symptomResult = await _symptomRepository.GetSymptom(symptomId);
+                totalScore += symptomResult.Score;
+            }
 
-            patient.FisrtName = patientRegistrationFormDto.FirstName;
-            patient.LastName = patientRegistrationFormDto.LastName;
-            patient.CountyId = county.CountyId;
-            patient.Age = patientRegistrationFormDto.Age;
-            patient.Phone = patientRegistrationFormDto.Phone;
-            patient.State =(int) PatientState.NOTTESTED;
-            patient.TotalScore = 0;
+            Patient patient = new Patient
+            {
+                FisrtName = patientRegistrationFormDto.FirstName,
+                LastName = patientRegistrationFormDto.LastName,
+                CountyId = county.CountyId,
+                Age = patientRegistrationFormDto.Age,
+                Phone = patientRegistrationFormDto.Phone,
+                State = (int)PatientState.NOTTESTED,
+                TotalScore = totalScore
+            };
 
             await _patientRepository.AddPatient(patient);
 
