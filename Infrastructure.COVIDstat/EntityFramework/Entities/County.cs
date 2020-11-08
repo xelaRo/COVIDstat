@@ -3,16 +3,16 @@ using System.Collections.Generic;
 
 namespace Infrastructure.COVIDstat.EntityFramework.Entities
 {
-    public partial class User
+    public partial class County
     {
-        public User()
+        public County()
         {
             Patient = new HashSet<Patient>();
         }
 
-        public Guid UserId { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public Guid CountyId { get; set; }
+        public string Name { get; set; }
+        public int PopulationNumber { get; set; }
 
         public virtual ICollection<Patient> Patient { get; set; }
     }

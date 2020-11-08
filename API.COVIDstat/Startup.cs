@@ -23,12 +23,14 @@ namespace API.COVIDstat
         {
             services.AddControllers();
 
-            services.AddDbContext<COVIDstatContext>(o =>
+            services.AddDbContext<CovidStatDBContext>(o =>
             {
                 o.UseSqlServer(Configuration.GetConnectionString("COVIDStatDb"));
             });
 
             services.ApplicationSecurityCollectionConfiguration(Configuration);
+            services.ConfigureServiceCollection();
+            services.ConfigureRepositoryCollection();
 
             services.AddSwaggerGen(c =>
             {

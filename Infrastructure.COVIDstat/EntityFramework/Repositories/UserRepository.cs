@@ -5,13 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Infrastructure.COVIDstat.EntityFramework.Repositories.Interfaces;
 
 namespace Infrastructure.COVIDstat.EntityFramework.Repositories
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
-        private COVIDstatContext _ctx;
-        public UserRepository(COVIDstatContext ctx)
+        private CovidStatDBContext _ctx;
+        public UserRepository(CovidStatDBContext ctx)
         {
             _ctx = ctx;
         }
@@ -20,6 +21,13 @@ namespace Infrastructure.COVIDstat.EntityFramework.Repositories
         {
 
             var user = await _ctx.User.Where(c => c.UserId == userId).FirstOrDefaultAsync();
+            return user;
+        }
+
+        public async Task<User> GetUser(string email, string password)
+        {
+
+            var user = await _ctx.User.Where(c => c.Email == email && c.Password.Contains(password)).FirstOrDefaultAsync();
             return user;
         }
 

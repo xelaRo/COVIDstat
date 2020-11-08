@@ -7,8 +7,8 @@ namespace Infrastructure.COVIDstat.EntityFramework
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly COVIDstatContext _ctx;
-        public UnitOfWork(COVIDstatContext ctx)
+        private readonly CovidStatDBContext _ctx;
+        public UnitOfWork(CovidStatDBContext ctx)
         {
             _ctx = ctx;
         }

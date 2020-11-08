@@ -8,10 +8,4 @@
     <ProjectReference Include="..\Infrastructure.COVIDstat\Infrastructure.COVIDstat.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="DTOs\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>

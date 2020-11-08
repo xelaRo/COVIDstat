@@ -4,13 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Infrastructure.COVIDstat.EntityFramework.Repositories.Interfaces;
 
 namespace Infrastructure.COVIDstat.EntityFramework.Repositories
 {
-    public class PatientRepository
+    public class PatientRepository : IPatientRepository
     {
-        private COVIDstatContext _ctx;
-        public PatientRepository(COVIDstatContext ctx)
+        private readonly CovidStatDBContext _ctx;
+        public PatientRepository(CovidStatDBContext ctx)
         {
             _ctx = ctx;
         }
@@ -22,15 +23,23 @@ namespace Infrastructure.COVIDstat.EntityFramework.Repositories
             return patient;
         }
 
+        public async Task<Patient> GetPatientBy(Guid userId)
+        {
+
+            var patient = await _ctx.Patient.Where(c => c.UserId == userId).FirstOrDefaultAsync();
+            return patient;
+        }
+
+
         public async Task<List<Patient>> GetPatientList()
         {
-            List<Patient> Pacients = await _ctx.Patient.ToListAsync();
-            return Pacients;
+            List<Patient> patients = await _ctx.Patient.ToListAsync();
+            return patients;
         }
 
         public async Task AddPatient(Patient patient)
         {
-            _ctx.Patient.Add(patient);
+            await _ctx.Patient.AddAsync(patient);
         }
 
     }

@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Infrastructure.COVIDstat.EntityFramework.Enums
 {
-    public enum Result
+    public enum PatientState
     {
-        PENDING,
         POSITIVE,
-        NEGATIVE
+        NEGATIVE,
+        NOTTESTED,
     }
 }

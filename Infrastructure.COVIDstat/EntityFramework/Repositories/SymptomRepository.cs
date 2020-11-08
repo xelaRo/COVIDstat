@@ -5,13 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Infrastructure.COVIDstat.EntityFramework.Repositories.Interfaces;
 
 namespace Infrastructure.COVIDstat.EntityFramework.Repositories
 {
-    public class SymptomRepository
+    public class SymptomRepository : ISymptomRepository
     {
-        private COVIDstatContext _ctx;
-        public SymptomRepository(COVIDstatContext ctx)
+        private CovidStatDBContext _ctx;
+        public SymptomRepository(CovidStatDBContext ctx)
         {
             _ctx = ctx;
         }
@@ -23,7 +24,7 @@ namespace Infrastructure.COVIDstat.EntityFramework.Repositories
             return symptom;
         }
 
-        public async Task<List<Symptom>> GetSymptomList()
+        public async Task<List<Symptom>> GetSymptoms()
         {
             List<Symptom> Symptoms = await _ctx.Symptom.ToListAsync();
             return Symptoms;
